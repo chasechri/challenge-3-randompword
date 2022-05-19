@@ -6,37 +6,44 @@ var generateBtn = document.querySelector("#generate");
 function generatePassword() {
     console.log("clicked button")
 
-    // 1 prompt user
-    var passwordLength = window.prompt('How many characters would you like your password to be?');
+    var passwordLength = Number.parseInt(
+      prompt("How many characters would you like your password to contain?")
+    );
 
-    var confirmSpecialcharacters = window.confirm('Click OK to confirm including special characters');
+    if(Number.isNaN(passwordLength)) {
+      alert("Please enter a number");
+    } else if (passwordLength < 8 || passwordLength > 128) {
+      alert("Password be between 8 and 128 characters");
+    }
+    else {
+      var includeLowerCase = confirm("Click OK to confirm lowercase letters");
+      var includeUpperCase = confirm("Click OK to confirm uppercase letters");
+      var includeSpecialCharacters = confirm("Click OK to confirm special characters");
 
-    var confirmLowercaseletters = window.confirm('Click OK to confirm including lowercase characters');
+      if (!includeLowerCase && !includeUpperCase && !includeSpecialCharacters) {
+        alert("Password must include lowercase, uppercase, and special characters");
+      } else {
+        var validCharacters = "";
+        if (includeLowerCase) {
+          validCharacters = validCharacters + "abcdefghijklmnopqrstuvwxyz";
+        }
+        if (includeUpperCase) {
+          validCharacters = validCharacters + "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        }
+        if (includeSpecialCharacters) {
+          validCharacters = validCharacters + "!@#$%^&*()";
+        }
 
-    var confirmUppercaseletters = window.confirm('Click Ok to confirm including uppercase characters');
-
-    // -password length between 8-128
-    // -lowercase, uppercase, special characters
-    // 2 validate the input 
-    // 3 generate pword base off the criteria
-    // 4 display password on page
-    
-return "password will go here"
+        var password = "";
+        for (var counter = 0; counter < passwordLength; counter = counter + 1) {
+          var randomNumber = Math.floor(Math.random() * validCharacters.length);
+          password = password + validCharacters.at(randomNumber);
+        }
+        return(password);
+      }
+    }  
 }
 
-
-function getRandomLower() {
-  return String.fromCharCode(Math.floor(Math.random() * 26) + 97);
-}
-
-function getRandomUpper() {
-  return String.fromCharCode(Math.floor(Math.random() * 26) + 65);
-}
-
-function getRandomSymbol() {
-  const symbols = '!@#$%^&*()';
-  return symbols[Math.floor(Math.random() * symbols.length)];
-}
 
 // Write password to the #password input
 function writePassword() {
