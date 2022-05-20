@@ -19,9 +19,10 @@ function generatePassword() {
       var includeLowerCase = confirm("Click OK to confirm lowercase letters");
       var includeUpperCase = confirm("Click OK to confirm uppercase letters");
       var includeSpecialCharacters = confirm("Click OK to confirm special characters");
+      var includeNumbers = confirm("Click OK to confirm numbers")
 
-      if (!includeLowerCase && !includeUpperCase && !includeSpecialCharacters) {
-        alert("Password must include lowercase, uppercase, and special characters");
+      if (!includeLowerCase && !includeUpperCase && !includeSpecialCharacters && !includeNumbers) {
+        alert("Password must include lowercase, uppercase, numbers, and special characters");
       } else {
         var validCharacters = "";
         if (includeLowerCase) {
@@ -32,6 +33,9 @@ function generatePassword() {
         }
         if (includeSpecialCharacters) {
           validCharacters = validCharacters + "!@#$%^&*()";
+        }
+        if (includeNumbers) {
+          validCharacters = validCharacters + "1234567890";
         }
 
         var password = "";
