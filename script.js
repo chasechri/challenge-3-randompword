@@ -18,6 +18,7 @@ function generatePassword() {
     else {
       var includeLowerCase = confirm("Click OK to confirm lowercase letters");
       var includeUpperCase = confirm("Click OK to confirm uppercase letters");
+      var includeUpperCase = confirm("Click OK to confirm uppercase letters");
       var includeSpecialCharacters = confirm("Click OK to confirm special characters");
       var includeNumbers = confirm("Click OK to confirm numbers")
 
